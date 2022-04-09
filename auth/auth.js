@@ -6,7 +6,7 @@ const localStrategy = require('passport-local').Strategy;
 passport.use('signup',new localStrategy({usernameField:'username',passwordField:'password'},async function(username, password, done){
     try{
         const users = await User.find({},{username:1, _id:0});
-        for (let user of users) if (user.username = username) return done(null, false , {message:'username is already used'});
+        for (let user of users) if (user.username === username) return done(null, false , {message:'username is already used'});
         let user = await User.create({username, password});
         return done(null,user);
     } catch (error){
