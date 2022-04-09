@@ -1,0 +1,3 @@
+<ul>
+    {{#each notes}}<li><a href="/notes/edit/{{this._id}}">{{this.data}}</a> + {{this.time}} + <a href="/notes/delete/{{this._id}}">delete</a></li>{{/each}}
+</ul>
