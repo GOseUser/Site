@@ -1,3 +1,5 @@
-<ul>
-    {{#each notes}}<li><a href="/notes/edit/{{this._id}}">{{this.data}}</a> + {{this.time}} + <a href="/notes/delete/{{this._id}}">delete</a></li>{{/each}}
-</ul>
+<form method="get" action="/notes{{#if token }}?token={{ token }}{{/if}}">
+    <ul>
+        {{#each notes}}<li><a href="/notes/edit/{{this._id}}{{#if token }}?token={{ token }}{{/if}}">{{this.data}}</a> + {{this.time}} + <a href="/notes/delete/{{this._id}}{{#if token }}?token={{ token }}{{/if}}">delete</a></li>{{/each}}
+    </ul>
+</form>

@@ -1,11 +1,23 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>{{title}}</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h2><a href="/note">add notes</a> <a href="/notes">see notes</a></h2>
-    {{{body}}}
-  </body>
+
+<head>
+  <title>{{title}}</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <h2>
+    <a href="/note{{#if token }}?token={{ token }}{{/if}}">add notes</a>
+    <a href="/notes{{#if token }}?token={{ token }}{{/if}}">see notes</a>
+    <a href="/users/register">register</a>
+    <a href="/users/login">login</a>
+    <a href="/users/profile{{#if token }}?token={{ token }}{{/if}}">profile</a>
+  </h2>
+  {{!-- {{#if token }}
+  <input type="hidden" name="token" value="{{ token }}">
+  {{/if }} --}}
+  {{{body}}}
+</body>
+
 </html>
