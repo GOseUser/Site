@@ -4,9 +4,9 @@ const User = require("../models/user");
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 
-router.get('/', function (req, res, next) {
-  res.send('respond with a resource');
-});
+// router.get('/', function (req, res, next) {
+//   res.send('respond with a resource');
+// });
 
 router.get('/register', function (req, res, next) {
   res.render('registration');
@@ -32,7 +32,7 @@ router.post('/login', async (req, res, next) => {
           if (error) return next(error);
           const body = { _id: user._id, username: user.username };
           const token = jwt.sign({ user: body }, 'NotesLoginSecret');
-          return res.render('note', { token });
+          res.send({ token });
         }
         );
       } catch (error) {
@@ -42,6 +42,7 @@ router.post('/login', async (req, res, next) => {
 });
 
 router.get('/profile', passport.authenticate('jwt', { session: false }), (req, res) => {
-  res.render('profile', { token: req.query.token });
+  res.render('profile', {});
 });
+
 module.exports = router;

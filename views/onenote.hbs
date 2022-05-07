@@ -1,4 +1,4 @@
-<form action="/notes/edit/" method="post">
-<input name="data" type="text" value="{{note.data}}">
-<button type="submit">Save changes</button>
+<form action="/notes/edit/{{ note._id }}" method="post">
+    <input name="data" type="text" value="{{ note.data }}">
+    <button type="submit">Save changes</button>
 </form>

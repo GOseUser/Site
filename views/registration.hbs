@@ -1,6 +1,26 @@
 <h2>Register</h2>
-<form method="post" action="/users/register">
-<input type="text" required="true" name="username" placeholder="username">
-<input type="text" required="true" name="password" placeholder="password">
-<button type="submit" name='submit'>Register</button>
+<form id="registratinForm" method="post">
+    <input type="text" required="true" name="username" placeholder="username">
+    <input type="password" required="true" name="password" placeholder="password">
+    <button type="submit" name='submit'>Register</button>
 </form>
+<script>
+    document.querySelector("#registratinForm").addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        const formJSON = Object.fromEntries(formData.entries());
+
+        try {
+            const response = await fetch('/users/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formJSON)
+            });
+            const result = await response.json();
+            location.href = "/users/login";
+        } catch (error) {
+            console.error('Error:', error);
+        }
+        return false;
+    });
+</script>

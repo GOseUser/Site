@@ -3,21 +3,42 @@
 
 <head>
   <title>{{title}}</title>
-  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel='stylesheet' href='/stylesheets/style.css'>
 </head>
 
 <body>
   <h2>
-    <a href="/note{{#if token }}?token={{ token }}{{/if}}">add notes</a>
-    <a href="/notes{{#if token }}?token={{ token }}{{/if}}">see notes</a>
-    <a href="/users/register">register</a>
-    <a href="/users/login">login</a>
-    <a href="/users/profile{{#if token }}?token={{ token }}{{/if}}">profile</a>
+    <a href="/">Main</a>
+    <a href="/note">Add notes</a>
+    <a href="/notes">See notes</a>
+    <a href="/users/register">Register</a>
+    <a href="/users/login">Login</a>
+    <a href="/users/profile">Profile</a>
+    <a id="logout">Logout</a>
   </h2>
-  {{!-- {{#if token }}
-  <input type="hidden" name="token" value="{{ token }}">
-  {{/if }} --}}
   {{{body}}}
+  <script>
+    const token = sessionStorage.getItem("token");
+    if (token) {
+      const links = document.querySelectorAll("a");
+      links.forEach(link => {
+        if (!link.href) return;
+        if (link.href.includes("?")) link.href += "&token=" + token;
+        else link.href += "?token=" + token;
+      });
+      const froms = document.querySelectorAll("form");
+      froms.forEach(form => {
+        if (!form.action) return;
+        if (form.action.includes("?")) form.action += "&token=" + token;
+        else form.action += "?token=" + token;
+      });
+    }
+    a = document.getElementById('logout');
+    a.addEventListener('click',() => {
+      sessionStorage.removeItem('token');
+      window.location = '/';
+    });
+  </script>
 </body>
 
 </html>
