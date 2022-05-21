@@ -9,7 +9,7 @@ const jwt = require('jsonwebtoken');
 // });
 
 router.get('/register', function (req, res, next) {
-  res.render('registration');
+  res.render('registration', { ...req.data });
 });
 
 router.post('/register', passport.authenticate('signup', { session: false }), function (req, res) {
@@ -17,7 +17,7 @@ router.post('/register', passport.authenticate('signup', { session: false }), fu
 });
 
 router.get('/login', (req, res) => {
-  res.render('login');
+  res.render('login', { ...req.data });
 });
 
 router.post('/login', async (req, res, next) => {
@@ -42,7 +42,7 @@ router.post('/login', async (req, res, next) => {
 });
 
 router.get('/profile', passport.authenticate('jwt', { session: false }), (req, res) => {
-  res.render('profile', {});
+  res.render('profile', { ...req.data });
 });
 
 module.exports = router;

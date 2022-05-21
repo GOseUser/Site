@@ -18,7 +18,7 @@
             });
             const result = await response.json();
             sessionStorage.setItem("token", result["token"]);
-            location.href = "/";
+            location.href = "/?token="+result.token;
         } catch (error) {
             console.error('Error:', error);
         }
